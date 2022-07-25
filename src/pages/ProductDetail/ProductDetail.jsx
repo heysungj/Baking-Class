@@ -1,15 +1,28 @@
 import "./ProductDetail.css";
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
-// import { useEffect, useState } from "react";
+import * as productsAPI from "../../utilities/products-api";
+import { useEffect, useState } from "react";
 
 export default function ProductCard() {
+  let defaultStartDate = new Date();
+  defaultStartDate = defaultStartDate.toISOString().slice(0, 10);
   // use navigate
   const navigate = useNavigate();
   const { state } = useLocation();
   let { product } = state;
   console.log(product);
 
+  const starterData = {
+    product: product.name,
+    startDate: defaultStartDate,
+    classTime: null,
+  };
+  const [orderInfo, setOrderInfo] = useState();
+
+  const handleChange = async (e) => {
+    const currentOrders = await productsAPI.getAll(e.target.startDate.value);
+  };
   return (
     <div>
       <h3>Product Detail</h3>
@@ -17,6 +30,24 @@ export default function ProductCard() {
       <img src={product.photo} alt="" />
       <h4>{product.description}</h4>
       <h3>{product.price}</h3>
+
+      <label>
+        <input
+          type="date"
+          name="startDate"
+          onChange={handleChange}
+          value={defaultStartDate}
+        />
+      </label>
+
+      <label for="classTime">Choose a time:</label>
+
+      <select name="class time" id="calss" onChange={handleChange}>
+        <option value="10:00">10:00 - 12:00</option>
+        <option value="13:00">13:00 - 15:00</option>
+        <option value="15:00">15:00 - 17:00</option>
+        <option value="17:00">17:00 - 19:00</option>
+      </select>
       <button
         onClick={() => {
           navigate(`/${product.id}`, {
@@ -26,7 +57,7 @@ export default function ProductCard() {
           });
         }}
       >
-        Check Details
+        Book Class
       </button>
     </div>
   );

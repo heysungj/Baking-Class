@@ -10,8 +10,8 @@ const orderSchema = new Schema(
     // A user's unpaid order is their "cart"
     product: { type: Schema.Types.ObjectId, ref: "Product" },
     isPaid: { type: Boolean, default: false },
-    startDateTime: { type: Date, required: true },
-    endDateTime: { type: Date, required: true },
+    startDate: { type: Date, required: true },
+    classTime: { type: String },
   },
   {
     timestamps: true,
@@ -34,7 +34,8 @@ orderSchema.statics.getCart = function (userId) {
   );
 };
 
-orderSchema.methods.addHotelToCart = async function ( phone, 
+orderSchema.methods.addHotelToCart = async function (
+  phone,
   hotel,
   room,
   checkIn,
