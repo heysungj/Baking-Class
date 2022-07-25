@@ -11,6 +11,7 @@ import NavBar from "../../components/NavBar/NavBar";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [oneProduct, setOneProduct] = useState();
   return (
     <main className="App">
       {user ? (
@@ -20,11 +21,11 @@ export default function App() {
             {/* client-side route that renders the component instance if the path matches the url in the address bar */}
             <Route path="/" element={<HomePage />} />
             <Route path="/:id" element={<ProductDetail />} />
-            <Route path="/calendar" element={<Calendar />} />
+            {/* <Route path="/calendar" element={<Calendar />} />
             <Route
               path="/users/myAccount"
               element={<UserAccount user={user} />}
-            />
+            /> */}
           </Routes>
         </>
       ) : (
