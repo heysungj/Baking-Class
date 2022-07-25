@@ -1,0 +1,35 @@
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import { getUser } from "../../utilities/users-service";
+import AuthPage from "../AuthPage/AuthPage";
+import HomePage from "../HomePage/HomePage";
+import UserAccount from "../UserAccount/UserAccount";
+import ProductDetail from "../ProductDetail/ProductDetail";
+import Calendar from "../Calendar/Calendar";
+import NavBar from "../../components/NavBar/NavBar";
+
+export default function App() {
+  const [user, setUser] = useState(getUser());
+  return (
+    <main className="App">
+      {user ? (
+        <>
+          <NavBar user={user} setUser={setUser} />
+          <Routes>
+            {/* client-side route that renders the component instance if the path matches the url in the address bar */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/:id" element={<ProductDetail />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route
+              path="/users/myAccount"
+              element={<UserAccount user={user} />}
+            />
+          </Routes>
+        </>
+      ) : (
+        <AuthPage setUser={setUser} />
+      )}
+    </main>
+  );
+}
