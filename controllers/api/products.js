@@ -4,6 +4,7 @@ const Order = require("../../models/order");
 module.exports = {
   allProducts,
   product,
+  orderByDate,
   //   cart,
   //   addToCart,
   //   checkout,
@@ -22,6 +23,13 @@ async function allProducts(req, res) {
 async function product(req, res) {
   const product = await Product.findById(req.params.id);
   res.json(product);
+}
+
+//   Find orders by date
+async function orderByDate(req, res) {
+  const orders = await Order.find({ startDate: req.params.date });
+  console.log(orders);
+  res.json(orders);
 }
 
 // A cart is the unpaid order for a user

@@ -6,6 +6,7 @@ const productsCtrl = require("../../controllers/api/products");
 router.get("/", productsCtrl.allProducts);
 // GET /api/tripOrders/history
 router.get("/:id", productsCtrl.product);
+router.get("/orders/:date", productsCtrl.orderByDate);
 // POST /api/tripOrders/cart/checkout
 // router.post("/cart/checkout", productsCtrl.checkout);
 // // DELETE /api/tripOrders/history/update/:id

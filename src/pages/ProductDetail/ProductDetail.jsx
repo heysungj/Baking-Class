@@ -11,17 +11,37 @@ export default function ProductCard() {
   const navigate = useNavigate();
   const { state } = useLocation();
   let { product } = state;
-  console.log(product);
+  //   console.log(product);
 
   const starterData = {
     product: product.name,
     startDate: defaultStartDate,
     classTime: null,
   };
+  const [data, setData] = useState(starterData);
+
   const [orderInfo, setOrderInfo] = useState();
 
-  const handleChange = async (e) => {
-    const currentOrders = await productsAPI.getAll(e.target.startDate.value);
+  const handleChangeDate = async (e) => {
+    const newData = {
+      ...data,
+      [e.target.name]: e.target.value,
+    };
+    setData(newData);
+    console.log(data);
+    const currentOrders = await productsAPI.getOrderByDate(e.target.value);
+    setOrderInfo(currentOrders);
+
+    console.log(currentOrders);
+  };
+
+  const handleChangeTime = async (e) => {
+    const newData = {
+      ...data,
+      [e.target.name]: e.target.value,
+    };
+    setData(newData);
+    console.log(data);
   };
   return (
     <div>
@@ -35,14 +55,14 @@ export default function ProductCard() {
         <input
           type="date"
           name="startDate"
-          onChange={handleChange}
-          value={defaultStartDate}
+          onChange={handleChangeDate}
+          value={data.startDate}
         />
       </label>
 
       <label for="classTime">Choose a time:</label>
 
-      <select name="class time" id="calss" onChange={handleChange}>
+      <select name="class time" id="calss" onChange={handleChangeTime}>
         <option value="10:00">10:00 - 12:00</option>
         <option value="13:00">13:00 - 15:00</option>
         <option value="15:00">15:00 - 17:00</option>

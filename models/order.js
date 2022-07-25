@@ -10,8 +10,8 @@ const orderSchema = new Schema(
     // A user's unpaid order is their "cart"
     product: { type: Schema.Types.ObjectId, ref: "Product" },
     isPaid: { type: Boolean, default: false },
-    startDate: { type: Date, required: true },
-    classTime: { type: String },
+    startDate: { type: String, required: true },
+    classTime: { type: String, required: true },
   },
   {
     timestamps: true,

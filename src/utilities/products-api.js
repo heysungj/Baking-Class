@@ -9,3 +9,8 @@ export function getAll() {
 export function getById(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
+
+export function getOrderByDate(date) {
+  console.log(date);
+  return sendRequest(`${BASE_URL}/orders/${date}`);
+}
