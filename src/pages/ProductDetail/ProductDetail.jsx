@@ -11,6 +11,7 @@ export default function ProductCard() {
   const navigate = useNavigate();
   const { state } = useLocation();
   let { product } = state;
+  let time;
   //   console.log(product);
 
   const starterData = {
@@ -32,7 +33,12 @@ export default function ProductCard() {
     const currentOrders = await productsAPI.getOrderByDate(e.target.value);
     setOrderInfo(currentOrders);
 
-    console.log(currentOrders);
+    time = [];
+    currentOrders.map((order) => {
+      return time.push(order.classTime);
+    });
+    console.log(time);
+    // console.log(currentOrders);
   };
 
   const handleChangeTime = async (e) => {
