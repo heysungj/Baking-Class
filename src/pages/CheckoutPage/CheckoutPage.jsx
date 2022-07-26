@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
 
 export default function CheckoutPage() {
@@ -48,7 +48,13 @@ export default function CheckoutPage() {
       <h4>Date: {data.startDate}</h4>
       <h4>Class time: {product.classTime} </h4>
       <h4>Total Price: $ {product.price}</h4>
-      {isPaid ? <button>My Account</button> : <div ref={paypal}></div>}
+      {isPaid ? (
+        <Link to="/users/myAccount">
+          <button>My Account</button>{" "}
+        </Link>
+      ) : (
+        <div ref={paypal}></div>
+      )}
     </div>
   );
 }

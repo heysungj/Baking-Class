@@ -1,17 +1,24 @@
-import React from 'react';
-import { checkToken } from '../../utilities/users-service';
+import React from "react";
+import * as productsAPI from "../../utilities/products-api";
+import { useEffect, useState } from "react";
+import OrderCard from "../../components/OrderCard/OrderCard";
 
 export default function OrderHistoryPage() {
+  const [orders, setOrders] = useState([]);
 
-  async function handleCheckToken() {
-    const expDate = await checkToken();
-    console.log(expDate);
-  }
+  useEffect(() => {
+    const List = async () => {
+      const allOrders = await productsAPI.getAllOrders();
+
+      setOrders(allOrders);
+      console.log(allOrders);
+    };
+    List();
+  }, []);
 
   return (
     <>
       <h1>OrderHistoryPage</h1>
-      <button onClick={handleCheckToken}>Check When My Login Expires</button>
     </>
   );
 }

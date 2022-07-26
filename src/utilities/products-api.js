@@ -15,6 +15,10 @@ export function getOrderByDate(date) {
   return sendRequest(`${BASE_URL}/orders/${date}`);
 }
 
+export function getAllOrders() {
+  return sendRequest(`${BASE_URL}/user/orders`);
+}
+
 // Add an item to the cart
 export async function addClassToCart(data, product) {
   // add unpaid  class tp cart

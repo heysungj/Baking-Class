@@ -23,11 +23,11 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/:id" element={<ProductDetail />} />
             <Route path="/checkout" element={<Checkout />} />
-            {/* <Route path="/calendar" element={<Calendar />} />
+            {/* <Route path="/calendar" element={<Calendar />} /> */}
             <Route
               path="/users/myAccount"
               element={<UserAccount user={user} />}
-            /> */}
+            />
           </Routes>
         </>
       ) : (

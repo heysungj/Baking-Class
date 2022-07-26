@@ -6,8 +6,11 @@ const productsCtrl = require("../../controllers/api/products");
 router.get("/", productsCtrl.allProducts);
 // GET /api/tripOrders/history
 router.get("/:id", productsCtrl.product);
+// GET orders on a spesific date
 router.get("/orders/:date", productsCtrl.orderByDate);
-// POST /api/tripOrders/cart/items/:id
+// GET /api/user/orders get all orders from  a user
+router.get("/user/orders", productsCtrl.allUserOrders);
+// POST /api/tripOrders/cart/new
 router.post("/cart/new", productsCtrl.addToCart);
 // POST /api/tripOrders/cart/checkout
 router.post("/cart/checkout", productsCtrl.checkout);

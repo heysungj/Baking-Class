@@ -8,6 +8,7 @@ module.exports = {
   //   cart,
   addToCart,
   checkout,
+  allUserOrders,
   //   history,
   //   cancelTrip,
   //   updateTrip,
@@ -32,6 +33,11 @@ async function orderByDate(req, res) {
   res.json(orders);
 }
 
+// Find all orders from a user
+async function allUserOrders(req, res) {
+  const allOrders = await Order.find({ user: req.user._id });
+  res.json(allOrders);
+}
 // A cart is the unpaid order for a user
 // async function cart(req, res) {
 //   const cart = await TripOrder.getCart(req.user._id);
