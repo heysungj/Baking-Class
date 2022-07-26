@@ -19,6 +19,10 @@ export function getAllOrders() {
   return sendRequest(`${BASE_URL}/user/orders`);
 }
 
+export function cancelOrderById(orderId) {
+  return sendRequest(`${BASE_URL}/user/orders/${orderId}`, "DELETE");
+}
+
 // Add an item to the cart
 export async function addClassToCart(data, product) {
   // add unpaid  class tp cart

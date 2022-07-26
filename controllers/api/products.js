@@ -9,6 +9,7 @@ module.exports = {
   addToCart,
   checkout,
   allUserOrders,
+  cancelOrder,
   //   history,
   //   cancelTrip,
   //   updateTrip,
@@ -91,9 +92,8 @@ async function checkout(req, res) {
 // // Delete a trip from the order history
 
 // // Delete a trip from the order history
-// async function cancelTrip(req, res) {
-//   console.log("delete hotel id:", req.params.id);
-//   await TripOrder.findByIdAndRemove({ _id: req.params.id });
-//   // const trip = await TripOrder.find({_id: req.params.id})
-//   // console.log('trip:', trip)
-// }
+async function cancelOrder(req, res) {
+  console.log("delete order id:", req.params.orderId);
+  const canceledOrder = await Order.findByIdAndRemove(req.params.orderId);
+  res.json(canceledOrder);
+}

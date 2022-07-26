@@ -17,7 +17,7 @@ export default function ProductCard() {
   const starterData = {
     product: product.name,
     startDate: defaultStartDate,
-    classTime: null,
+    classTime: "10:00",
   };
   const [data, setData] = useState(starterData);
 
