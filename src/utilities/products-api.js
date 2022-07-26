@@ -16,10 +16,10 @@ export function getOrderByDate(date) {
 }
 
 // Add an item to the cart
-export async function addClassToCart(data, prodcut) {
+export async function addClassToCart(data, product) {
   // add unpaid  class tp cart
   return sendRequest(`${BASE_URL}/cart/new`, "POST", {
     data,
-    prodcut,
+    product,
   });
 }

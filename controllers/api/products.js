@@ -6,7 +6,7 @@ module.exports = {
   product,
   orderByDate,
   //   cart,
-  //   addToCart,
+  addToCart,
   //   checkout,
   //   history,
   //   cancelTrip,
@@ -38,21 +38,15 @@ async function orderByDate(req, res) {
 //   res.json(cart);
 // }
 
-// // Add a hotel to the cart
-// async function addToCart(req, res) {
-//   // pass all the info we need for order in req.body
-//   const { hotel, room, checkIn, checkOut, hotel_id, hotelPhoto } = req.body;
-//   const cart = await TripOrder.getCart(req.user._id);
-//   await cart.addHotelToCart(
-//     hotel,
-//     room,
-//     checkIn,
-//     checkOut,
-//     hotel_id,
-//     hotelPhoto
-//   );
-//   res.json(cart);
-// }
+// Add a class to the cart
+async function addToCart(req, res) {
+  // pass all the info we need for order in req.body
+  const { data, product } = req.body;
+  const cart = await Order.getCart(req.user._id);
+  await cart.addClassToCart(data, product);
+  console.log("controller", cart);
+  res.json(cart);
+}
 
 // // PUT route function to update existing order
 // async function updateTrip(req, res) {

@@ -55,12 +55,22 @@ export default function ProductCard() {
   };
 
   const handleChangeTime = async (e) => {
-    const newData = {
+    const newData = await {
       ...data,
       [e.target.name]: e.target.value,
     };
     setData(newData);
-    console.log(data);
+    console.log("handle change time new data", data);
+  };
+
+  const handleClick = async () => {
+    const updatedCart = await productsAPI.addClassToCart(data, product);
+    navigate("/checkout", {
+      state: {
+        product,
+        data,
+      },
+    });
   };
   return (
     <div>
@@ -81,7 +91,7 @@ export default function ProductCard() {
 
       <label for="classTime">Choose a time:</label>
 
-      <select name="class time" id="calss" onChange={handleChangeTime}>
+      <select name="classTime" id="calss" onChange={handleChangeTime}>
         <option
           value="10:00"
           disabled={selectedTime.includes("10:00") ? true : false}
@@ -115,12 +125,7 @@ export default function ProductCard() {
       </select>
       <button
         onClick={() => {
-          navigate("/checkout", {
-            state: {
-              product,
-              data,
-            },
-          });
+          handleClick();
         }}
       >
         Book Class

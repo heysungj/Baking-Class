@@ -8,10 +8,12 @@ const orderSchema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "User" },
     phone: { type: Number },
     // A user's unpaid order is their "cart"
-    product: { type: Schema.Types.ObjectId, ref: "Product" },
+    productId: { type: Schema.Types.ObjectId, ref: "Product" },
+    productName: { type: String, required: true },
     isPaid: { type: Boolean, default: false },
     startDate: { type: String, required: true },
     classTime: { type: String, required: true },
+    price: { type: Number },
   },
   {
     timestamps: true,
@@ -34,32 +36,16 @@ orderSchema.statics.getCart = function (userId) {
   );
 };
 
-orderSchema.methods.addHotelToCart = async function (
-  phone,
-  hotel,
-  room,
-  checkIn,
-  checkOut,
-  hotel_id,
-  hotelPhoto
-) {
+orderSchema.methods.addClassToCart = async function (data, product) {
   // cart = this means the tripSchema
   const currentOrder = this;
+  console.log("oder model", data);
 
-  currentOrder.checkIn = checkIn;
-  currentOrder.checkOut = checkOut;
-  currentOrder.numberOfPeople = room.nr_adults;
-  currentOrder.hotelName = hotel.name;
-  currentOrder.hotelId = hotel_id;
-  currentOrder.hotelPhoto = hotelPhoto;
-  currentOrder.price =
-    room.product_price_breakdown.gross_amount_per_night.value;
-  currentOrder.totalPrice = room.price_breakdown.gross_price;
-  currentOrder.roomName = room.name;
-  currentOrder.rating = hotel.review_score;
-  // currentOrder.hotelPhoto = room.name;
-  currentOrder.address = `${hotel.address},${hotel.city}, ${hotel.zip}`;
-
+  currentOrder.productId = product.id;
+  currentOrder.productName = product.name;
+  currentOrder.startDate = data.startDate;
+  currentOrder.classTime = data.classTime;
+  currentOrder.price = product.price;
   return currentOrder.save();
 };
 
