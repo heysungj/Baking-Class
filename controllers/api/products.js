@@ -1,5 +1,8 @@
 const Product = require("../../models/product");
 const Order = require("../../models/order");
+const User = require("../../models/user");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 module.exports = {
   allProducts,
@@ -55,27 +58,22 @@ async function addToCart(req, res) {
   res.json(cart);
 }
 
-// // PUT route function to update existing order
-// async function updateTrip(req, res) {
-//   // console.log('in the controller')
-//   const { id, room, checkIn, checkOut, people } = req.body;
-//   console.log("req.body of new hotel room", req.body);
-//   const currentTripOrder = await TripOrder.findByIdAndUpdate(id, {
-//     checkIn: req.body.checkIn,
-//     checkOut: req.body.checkOut,
-//     roomName: req.body.room.room_name,
-//     price: req.body.room.price_breakdown.gross_price,
-//     totalPrice: req.body.room.price_breakdown.all_inclusive_price,
-//     numberOfPeople: req.body.people,
-//   });
-//   console.log("triporder.findbyid: ", currentTripOrder);
-// }
-
 // // Update the cart's isPaid property to true
+// send email confirmation
 async function checkout(req, res) {
+  const user = await User.findById(req.user._id);
+  // console.log("checkout user", user);
   const cart = await Order.getCart(req.user._id);
   cart.isPaid = true;
+  const msg = {
+    to: user.email,
+    from: "bakingclasstest@gmail.com",
+    subject: `Order Confirmation ${cart.orderId}`,
+    text: `You have booked ${cart.productName} class on ${cart.startDate} at ${cart.classTime}`,
+  };
+  sgMail.send(msg);
   await cart.save();
+
   // console.log("controller", cart);
   res.json(cart);
 }
