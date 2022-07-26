@@ -29,7 +29,7 @@ async function product(req, res) {
 //   Find orders by date
 async function orderByDate(req, res) {
   const orders = await Order.find({ startDate: req.params.date });
-  console.log(orders);
+  console.log("controllerOrders", orders);
   res.json(orders);
 }
 
@@ -50,7 +50,7 @@ async function addToCart(req, res) {
   const { data, product } = req.body;
   const cart = await Order.getCart(req.user._id);
   await cart.addClassToCart(data, product);
-  console.log("controller", cart);
+  // console.log("controller", cart);
   res.json(cart);
 }
 
@@ -75,7 +75,7 @@ async function checkout(req, res) {
   const cart = await Order.getCart(req.user._id);
   cart.isPaid = true;
   await cart.save();
-  console.log("controller", cart);
+  // console.log("controller", cart);
   res.json(cart);
 }
 

@@ -19,6 +19,9 @@ export default function OrderHistoryPage() {
   return (
     <>
       <h1>OrderHistoryPage</h1>
+      {orders.map((order, index) => {
+        return <OrderCard order={order} key={index} />;
+      })}
     </>
   );
 }

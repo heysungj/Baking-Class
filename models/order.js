@@ -10,6 +10,7 @@ const orderSchema = new Schema(
     // A user's unpaid order is their "cart"
     productId: { type: Schema.Types.ObjectId, ref: "Product" },
     productName: { type: String, required: true },
+    productPhoto: { type: String },
     isPaid: { type: Boolean, default: false },
     startDate: { type: String, required: true },
     classTime: { type: String, required: true },
@@ -43,6 +44,7 @@ orderSchema.methods.addClassToCart = async function (data, product) {
 
   currentOrder.productId = product.id;
   currentOrder.productName = product.name;
+  currentOrder.productPhoto = product.photo;
   currentOrder.startDate = data.startDate;
   currentOrder.classTime = data.classTime;
   currentOrder.price = product.price;
