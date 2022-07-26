@@ -7,7 +7,7 @@ module.exports = {
   orderByDate,
   //   cart,
   addToCart,
-  //   checkout,
+  checkout,
   //   history,
   //   cancelTrip,
   //   updateTrip,
@@ -65,15 +65,13 @@ async function addToCart(req, res) {
 // }
 
 // // Update the cart's isPaid property to true
-// async function checkout(req, res) {
-//   const { cardinfo } = req.body;
-//   console.log(cardinfo);
-//   const cart = await TripOrder.getCart(req.user._id);
-//   cart.isPaid = true;
-//   await cart.save();
-//   const cardData = await Card.create(cardinfo);
-//   res.json({ cart, cardData });
-// }
+async function checkout(req, res) {
+  const cart = await Order.getCart(req.user._id);
+  cart.isPaid = true;
+  await cart.save();
+  console.log("controller", cart);
+  res.json(cart);
+}
 
 // // Return the logged in user's paid order history
 // async function history(req, res) {

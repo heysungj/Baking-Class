@@ -1,8 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import * as productsAPI from "../../utilities/products-api";
 
 export default function CheckoutPage() {
   const paypal = useRef();
+  const { state } = useLocation();
+  let { product, data } = state;
+  const [isPaid, setIsPaid] = useState(false);
 
+  //   Use Paypal Api
   useEffect(() => {
     window.paypal
       .Buttons({
@@ -11,10 +17,10 @@ export default function CheckoutPage() {
             intent: "CAPTURE",
             purchase_units: [
               {
-                description: "cool lookling shoes",
+                description: product.name,
                 amount: {
                   currency_code: "USD",
-                  value: 100.0,
+                  value: product.price,
                 },
               },
             ],
@@ -22,6 +28,10 @@ export default function CheckoutPage() {
         },
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
+          if (order) {
+            productsAPI.checkout();
+            setIsPaid(true);
+          }
           console.log(order);
         },
         onError: (err) => {
@@ -32,8 +42,13 @@ export default function CheckoutPage() {
   });
   return (
     <div>
-      <h1>Check out Page</h1>
-      <div ref={paypal}></div>
+      {isPaid ? <h1>Order Confirmation</h1> : <h1>Check out Page</h1>}
+      <h3>{product.name}</h3>
+      <img src={product.photo} alt="" />
+      <h4>Date: {data.startDate}</h4>
+      <h4>Class time: {product.classTime} </h4>
+      <h4>Total Price: $ {product.price}</h4>
+      {isPaid ? <button>My Account</button> : <div ref={paypal}></div>}
     </div>
   );
 }

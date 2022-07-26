@@ -10,7 +10,7 @@ router.get("/orders/:date", productsCtrl.orderByDate);
 // POST /api/tripOrders/cart/items/:id
 router.post("/cart/new", productsCtrl.addToCart);
 // POST /api/tripOrders/cart/checkout
-// router.post("/cart/checkout", productsCtrl.checkout);
+router.post("/cart/checkout", productsCtrl.checkout);
 // // DELETE /api/tripOrders/history/update/:id
 // router.put("/history/update/:id", productsCtrl.updateOrder)
 // // DELETE /api/tripOrders/history/:id
