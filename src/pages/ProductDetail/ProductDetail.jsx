@@ -11,7 +11,7 @@ export default function ProductCard() {
   const navigate = useNavigate();
   const { state } = useLocation();
   let { product } = state;
-  let time;
+  const [selectedTime, setSelectedTime] = useState([]);
   //   console.log(product);
 
   const starterData = {
@@ -23,6 +23,18 @@ export default function ProductCard() {
 
   const [orderInfo, setOrderInfo] = useState();
 
+  useEffect(() => {
+    const Time = async () => {
+      const currentOrders = await productsAPI.getOrderByDate(defaultStartDate);
+      let time = [];
+      currentOrders.map((order) => {
+        return time.push(order.classTime);
+      });
+      setSelectedTime(time);
+    };
+    Time();
+  }, []);
+
   const handleChangeDate = async (e) => {
     const newData = {
       ...data,
@@ -33,10 +45,11 @@ export default function ProductCard() {
     const currentOrders = await productsAPI.getOrderByDate(e.target.value);
     setOrderInfo(currentOrders);
 
-    time = [];
+    let time = [];
     currentOrders.map((order) => {
       return time.push(order.classTime);
     });
+    setSelectedTime(time);
     console.log(time);
     // console.log(currentOrders);
   };
@@ -69,16 +82,43 @@ export default function ProductCard() {
       <label for="classTime">Choose a time:</label>
 
       <select name="class time" id="calss" onChange={handleChangeTime}>
-        <option value="10:00">10:00 - 12:00</option>
-        <option value="13:00">13:00 - 15:00</option>
-        <option value="15:00">15:00 - 17:00</option>
-        <option value="17:00">17:00 - 19:00</option>
+        <option
+          value="10:00"
+          disabled={selectedTime.includes("10:00") ? true : false}
+        >
+          10:00 - 12:00
+        </option>
+        <option
+          value="13:00"
+          disabled={selectedTime.includes("13:00") ? true : false}
+        >
+          13:00 - 15:00
+        </option>
+        <option
+          value="15:00"
+          disabled={selectedTime.includes("15:00") ? true : false}
+        >
+          15:00 - 17:00
+        </option>
+        <option
+          value="17:00"
+          disabled={selectedTime.includes("17:00") ? true : false}
+        >
+          17:00 - 19:00
+        </option>
+        <option
+          value="19:00"
+          disabled={selectedTime.includes("19:00") ? true : false}
+        >
+          19:00 - 21:00
+        </option>
       </select>
       <button
         onClick={() => {
-          navigate(`/${product.id}`, {
+          navigate("/checkout", {
             state: {
               product,
+              data,
             },
           });
         }}
