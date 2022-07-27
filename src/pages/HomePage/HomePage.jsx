@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import * as productsAPI from "../../utilities/products-api";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import AddClass from "../../components/AddClass/AddClass";
 
-export default function HomePage() {
+export default function HomePage({ user }) {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function HomePage() {
       {productList.map((product, index) => {
         return <ProductCard product={product} key={index} />;
       })}
+      {user.admin ? <button>Add Class</button> : <></>}
     </div>
   );
 }

@@ -6,7 +6,6 @@ import {
 } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
-  MonthView,
   WeekView,
   Toolbar,
   DateNavigator,
@@ -60,7 +59,6 @@ export default function ClassCalendar() {
         <Toolbar />
         <DateNavigator />
         <TodayButton />
-        {/* <MonthView /> */}
         <Appointments />
         <AppointmentForm />
       </Scheduler>
