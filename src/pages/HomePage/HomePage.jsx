@@ -3,6 +3,7 @@ import * as productsAPI from "../../utilities/products-api";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Modal from "react-modal";
 import AddClass from "../../components/AddClass/AddClass";
+import { AiOutlinePlusSquare } from "react-icons/ai";
 
 export default function HomePage({ user }) {
   const [productList, setProductList] = useState([]);
@@ -52,12 +53,12 @@ export default function HomePage({ user }) {
   return (
     <div>
       <h1>Current Classes</h1>
+      <AiOutlinePlusSquare onClick={openModal} />
       {productList.map((product, index) => {
         return <ProductCard product={product} key={index} />;
       })}
 
       {/* modal */}
-      <button onClick={openModal}>Add Class</button>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
