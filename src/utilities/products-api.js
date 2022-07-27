@@ -10,12 +10,16 @@ export function getById(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
 
+export function getAllOrders() {
+  return sendRequest(`${BASE_URL}/user/allOrders`);
+}
+
 export function getOrderByDate(date) {
   console.log(date);
   return sendRequest(`${BASE_URL}/orders/${date}`);
 }
 
-export function getAllOrders() {
+export function getOneUserOrders() {
   return sendRequest(`${BASE_URL}/user/orders`);
 }
 

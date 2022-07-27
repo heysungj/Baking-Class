@@ -10,6 +10,8 @@ router.get("/:id", productsCtrl.product);
 router.get("/orders/:date", productsCtrl.orderByDate);
 // GET /api/user/orders get all orders from  a user
 router.get("/user/orders", productsCtrl.allUserOrders);
+// GET /api/user/orders get all orders from  a user
+router.get("/user/allOrders", productsCtrl.allOrders);
 // DELETE /api/user/orders get all orders from  a user
 router.delete("/user/orders/:orderId", productsCtrl.cancelOrder);
 // POST /api/tripOrders/cart/new

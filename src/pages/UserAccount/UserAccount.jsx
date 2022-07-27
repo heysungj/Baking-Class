@@ -8,7 +8,7 @@ export default function OrderHistoryPage() {
 
   useEffect(() => {
     const List = async () => {
-      const allOrders = await productsAPI.getAllOrders();
+      const allOrders = await productsAPI.getOneUserOrders();
 
       setOrders(allOrders);
       console.log(allOrders);
