@@ -44,14 +44,14 @@ export default function EditClass({ product }) {
           className=""
           type="text"
           name="name"
-          value={product.name}
+          value={editedClass.name}
           onChange={handleChange}
           required
         />
         <label>Class Description</label>
         <textarea
           name="description"
-          value={product.description}
+          value={editedClass.description}
           onChange={handleChange}
           required
         />
@@ -60,7 +60,7 @@ export default function EditClass({ product }) {
 
         <input
           className=""
-          value={product.price}
+          value={editedClass.price}
           type="number"
           name="price"
           onChange={handleChange}
