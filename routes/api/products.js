@@ -18,6 +18,8 @@ router.delete("/user/orders/:orderId", productsCtrl.cancelOrder);
 router.post("/cart/new", productsCtrl.addToCart);
 // POST /api/tripOrders/cart/checkout
 router.post("/cart/checkout", productsCtrl.checkout);
+// POST /api/tripOrders/newClass
+router.post("/newClass", productsCtrl.addClass);
 // // DELETE /api/tripOrders/history/update/:id
 // router.put("/history/update/:id", productsCtrl.updateOrder)
 // // DELETE /api/tripOrders/history/:id

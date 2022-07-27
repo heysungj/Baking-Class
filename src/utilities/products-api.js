@@ -35,6 +35,13 @@ export async function addClassToCart(data, product) {
     product,
   });
 }
+// Add new Class to database
+export async function addClass(newClass) {
+  // add unpaid  class tp cart
+  return sendRequest(`${BASE_URL}/newClass`, "POST", {
+    newClass,
+  });
+}
 
 // Updates the order's (cart's) isPaid property to true
 export function checkout() {

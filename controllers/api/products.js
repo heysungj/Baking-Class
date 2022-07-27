@@ -14,7 +14,7 @@ module.exports = {
   allUserOrders,
   cancelOrder,
   allOrders,
-  //   cancelTrip,
+  addClass,
   //   updateTrip,
 };
 
@@ -62,6 +62,14 @@ async function addToCart(req, res) {
   await cart.addClassToCart(data, product);
   // console.log("controller", cart);
   res.json(cart);
+}
+
+// Add new class to database
+async function addClass(req, res) {
+  const { newClass } = req.body;
+  let addedClass = new Product(newClass);
+  addedClass.save();
+  res.json(addedClass);
 }
 
 // // Update the cart's isPaid property to true

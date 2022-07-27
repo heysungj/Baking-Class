@@ -1,27 +1,34 @@
 import { toast } from "react-toastify";
 import { useState } from "react";
+import * as productsAPI from "../../utilities/products-api";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function AddClass() {
   const [newClass, setNewClass] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const cardData = {
-      ...cardinfo,
+    const product = {
+      ...newClass,
       [e.target.name]: e.target.value,
     };
 
-    setCardinfo(cardData);
-    // console.log(cardData);
+    setNewClass(product);
+    console.log(product);
   };
 
-  const handlePay = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const addPaymentInfo = await ordersAPI.checkout(cardinfo);
-    navigate("/users/myAccount");
+    const addedClass = await productsAPI.addClass(newClass);
+    console.log("added class", addedClass);
+    toast.success("Add Success");
+    navigate(0);
   };
 
   return (
     <div>
-      <form onSubmit={async (e) => handlePay(e)}>
+      <form onSubmit={async (e) => handleSubmit(e)}>
         <div>
           <label>Class Name</label>
           <input
@@ -39,7 +46,7 @@ export default function AddClass() {
           <input
             className=""
             type="number"
-            name="expDate"
+            name="price"
             onChange={handleChange}
             required
           />
