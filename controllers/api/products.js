@@ -1,6 +1,10 @@
 const Product = require("../../models/product");
 const Order = require("../../models/order");
 const User = require("../../models/user");
+// for aws to save photos
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+// for sendgrid mail
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
