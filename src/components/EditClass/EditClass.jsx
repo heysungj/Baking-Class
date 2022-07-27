@@ -3,17 +3,22 @@ import { useNavigate } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
 
 export default function EditClass({ product }) {
-  const [editedClass, setEditedClass] = useState();
+  const [editedClass, setEditedClass] = useState({
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    photo: product.photo,
+  });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const product = {
+    const editedProduct = {
       ...editedClass,
       [e.target.name]: e.target.value,
     };
 
-    setEditedClass(product);
-    console.log("edited class", product);
+    setEditedClass(editedProduct);
+    console.log("edited class", editedProduct);
   };
 
   //   update class
@@ -65,7 +70,6 @@ export default function EditClass({ product }) {
         <input
           className=""
           type="file"
-          value={product.photo}
           name="photo"
           onChange={handleChange}
           required

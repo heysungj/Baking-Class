@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
   };
 
   // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-  Modal.setAppElement("#root");
+  // Modal.setAppElement("#root");
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
