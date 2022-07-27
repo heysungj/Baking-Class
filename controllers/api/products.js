@@ -15,7 +15,8 @@ module.exports = {
   cancelOrder,
   allOrders,
   addClass,
-  //   updateTrip,
+  updateClass,
+  deleteClass,
 };
 
 // Find all products
@@ -39,7 +40,9 @@ async function orderByDate(req, res) {
 
 // Find all orders from a user
 async function allUserOrders(req, res) {
-  const allOrders = await Order.find({ user: req.user._id });
+  const allOrders = await Order.find({ user: req.user._id })
+    .sort("-startDate")
+    .exec();
   res.json(allOrders);
 }
 
@@ -72,6 +75,24 @@ async function addClass(req, res) {
   res.json(addedClass);
 }
 
+// // Delete a trip from the order history
+async function updateClass(req, res) {
+  const { editedClass } = req.body;
+  const updatedClass = await Product.findByIdAndUpdate(req.params.productId, {
+    name: editedClass.name,
+    description: editedClass.description,
+    photo: editedClass.photo,
+    price: editedClass.price,
+  });
+  res.json(updatedClass);
+}
+
+// // Delete a class from database
+async function deleteClass(req, res) {
+  const deletedProduct = await Product.findByIdAndRemove(req.params.productId);
+  res.json(deletedProduct);
+}
+
 // // Update the cart's isPaid property to true
 // send email confirmation
 async function checkout(req, res) {
@@ -100,8 +121,6 @@ async function checkout(req, res) {
 //     .exec();
 //   res.json(tripOrders);
 // }
-
-// // Delete a trip from the order history
 
 // // Delete a trip from the order history
 async function cancelOrder(req, res) {

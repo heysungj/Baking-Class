@@ -43,6 +43,20 @@ export async function addClass(newClass) {
   });
 }
 
+// update Class to database
+export async function editClass(editedClass, productId) {
+  // add unpaid  class tp cart
+  return sendRequest(`${BASE_URL}/editClass/${productId}`, "PUT", {
+    editedClass,
+  });
+}
+
+// update Class to database
+export async function deleteClass(productId) {
+  // add unpaid  class tp cart
+  return sendRequest(`${BASE_URL}/deleteClass/${productId}`, "DELETE");
+}
+
 // Updates the order's (cart's) isPaid property to true
 export function checkout() {
   // Changing data on the server, so make it a POST request
