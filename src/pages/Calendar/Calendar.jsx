@@ -6,7 +6,11 @@ import {
 } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
+  MonthView,
   WeekView,
+  Toolbar,
+  DateNavigator,
+  TodayButton,
   Appointments,
   AppointmentForm,
 } from "@devexpress/dx-react-scheduler-material-ui";
@@ -14,6 +18,9 @@ import * as productsAPI from "../../utilities/products-api";
 
 export default function ClassCalendar() {
   const [events, setEvents] = useState([]);
+  const [currentDate, setCurrentDate] = useState(
+    new Date().toLocaleDateString()
+  );
   let list = [];
 
   useEffect(() => {
@@ -38,13 +45,22 @@ export default function ClassCalendar() {
     List();
   }, []);
 
+  const changeCurrentDate = (newDate) => setCurrentDate(newDate);
+
   return (
     <div id="calendar">
       <Scheduler data={events}>
-        <ViewState />
+        <ViewState
+          currentDate={currentDate}
+          onCurrentDateChange={changeCurrentDate}
+        />
         <EditingState />
         <IntegratedEditing />
         <WeekView startDayHour={9} endDayHour={22} cellDuration={60} />
+        <Toolbar />
+        <DateNavigator />
+        <TodayButton />
+        {/* <MonthView /> */}
         <Appointments />
         <AppointmentForm />
       </Scheduler>
