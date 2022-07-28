@@ -328,7 +328,7 @@ async function checkout(req, res) {
               <tbody>
                 <tr>
                 <td align="center" bgcolor="#000000" class="inner-td" style="border-radius:6px; font-size:16px; text-align:left; background-color:inherit;">
-                  <a href="" style="background-color:#000000; border:1px solid #000000; border-color:#000000; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:18px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 18px 12px 18px; text-align:center; text-decoration:none; border-style:solid; font-family:inherit;" target="_blank">Follow Your Delivery</a>
+                  <a href="" style="background-color:#000000; border:1px solid #000000; border-color:#000000; border-radius:0px; border-width:1px; color:#ffffff; display:inline-block; font-size:18px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 18px 12px 18px; text-align:center; text-decoration:none; border-style:solid; font-family:inherit;" target="_blank">${req.user.name}</a>
                 </td>
                 </tr>
               </tbody>
@@ -609,7 +609,7 @@ async function cancelOrder(req, res) {
   res.json(canceledOrder);
 }
 
-// baking-class-project
+// aws setting up
 
 const readFile = async (file, urlArr) => {
   try {
@@ -638,43 +638,3 @@ const readFile = async (file, urlArr) => {
 const removeFile = async (file) => {
   await fs.rm("uploads/" + file);
 };
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-// post new ryokan using AWS
-// router.post("/new", upload.array("photos"), async (req, res) => {
-//   try {
-//     // reg ex to match
-//     const re = `${req.session.userId}`;
-//     const regex = new RegExp(re);
-//     const photoUrls = [];
-
-//     const allFiles = await fs.readdir("uploads/");
-
-//     const matches = allFiles.filter((filePath) => {
-//       return filePath.match(regex);
-//     });
-
-//     const numFiles = matches.length;
-//     if (numFiles) {
-//       // Read in the file, convert it to base64, store to S3
-//       for (i = 0; i < numFiles; i++) {
-//         await readFile(matches[i], photoUrls);
-//       }
-
-//       for (i = 0; i < numFiles; i++) {
-//         await removeFile(matches[i]);
-//       }
-//     }
-//     console.log(photoUrls);
-
-//     const newRyokan = new Ryokan(req.body);
-//     newRyokan.img = photoUrls;
-//     await newRyokan.save();
-
-//     // redirect user to index page if successfully created item
-//     res.redirect("/ryokans");
-//   } catch (error) {
-//     console.log("Error loading temp folder");
-//     res.json({ error });
-//   }
-// });
