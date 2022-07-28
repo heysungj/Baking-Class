@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { post } from "axios";
 import { getToken } from "../../utilities/users-service";
+import "./AddClass.css";
 
 export default function AddClass() {
   const [newClass, setNewClass] = useState();
@@ -55,7 +56,7 @@ export default function AddClass() {
   return (
     <div>
       <form onSubmit={async (e) => handleSubmit(e)}>
-        <div>
+        <div className="modalContainer">
           <label>Class Name</label>
           <input
             className=""
@@ -78,7 +79,7 @@ export default function AddClass() {
           />
           <label>Photo</label>
           <input type="file" name="photo" onChange={handleChange} required />
-          <button className="" type="submit">
+          <button className="btn btn-secondary" type="submit">
             Add Class
           </button>
         </div>

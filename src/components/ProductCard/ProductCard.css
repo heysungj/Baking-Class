@@ -1,0 +1,34 @@
+.eachProductContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    border-radius: 10px;
+    border: 2px solid lightgray;
+    position: relative;
+    width: 25vw;
+}
+
+.eachProduct{
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+
+
+.productImg{
+    height: 20rem;
+    width: 20rem;
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.btn-secondary{
+    border: none;
+    margin: 1rem;
+    
+}

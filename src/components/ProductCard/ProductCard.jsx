@@ -43,11 +43,19 @@ export default function ProductCard({ product }) {
   ///////////////////////////////////////////
 
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <AiOutlineEdit onClick={openModal} />
-      <img src={product.photo} alt="" />
+    <div className="eachProductContainer">
+      <div className="eachProduct">
+        <h3>{product.name}</h3>
+        <AiOutlineEdit
+          onClick={openModal}
+          size={"2rem"}
+          style={{ cursor: "pointer", margin: "0.5rem", color: "purple" }}
+        />
+      </div>
+      <img className="productImg" src={product.photo} alt="" />
+
       <button
+        className="btn btn-secondary"
         onClick={() => {
           navigate(`/${product.id}`, {
             state: {

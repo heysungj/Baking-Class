@@ -1,8 +1,16 @@
+.navbar-wrapper{
+display: flex;
+flex-direction: column;
+}
+
+.imgIsolater{
+    background: url('./image0.jpeg');
+    background-size: cover;
+    height: 40vh;
+}
 .navbar-brand{
     font-size:2rem ;
     font-family: 'Lobster', cursive;
-
-    
     
 }
 

@@ -4,6 +4,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import Modal from "react-modal";
 import AddClass from "../../components/AddClass/AddClass";
 import { AiOutlinePlusSquare } from "react-icons/ai";
+import "./HomePage.css";
 
 export default function HomePage({ user }) {
   const [productList, setProductList] = useState([]);
@@ -31,7 +32,7 @@ export default function HomePage({ user }) {
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
+    subtitle.style.color = "#003580";
   }
 
   function closeModal() {
@@ -51,13 +52,20 @@ export default function HomePage({ user }) {
   }, []);
 
   return (
-    <div>
-      <h1>Current Classes</h1>
-      <AiOutlinePlusSquare onClick={openModal} />
-      {productList.map((product, index) => {
-        return <ProductCard product={product} key={index} />;
-      })}
-
+    <div className="product">
+      <div className="eachProductOuter">
+        <h1>Current Classes</h1>
+        <AiOutlinePlusSquare
+          onClick={openModal}
+          size={"2.5rem"}
+          style={{ cursor: "pointer", margin: "0.5rem", color: "purple" }}
+        />
+      </div>
+      <div className="row-display">
+        {productList.map((product, index) => {
+          return <ProductCard product={product} key={index} />;
+        })}
+      </div>
       {/* modal */}
       <Modal
         isOpen={modalIsOpen}
