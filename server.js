@@ -2,6 +2,21 @@ const express = require("express");
 const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
+const bodyParser = require("body-parser");
+
+// for aws to save photos
+const multer = require("multer");
+
+// setup multer middleware to parse form-data
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.user._id.toString() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage: storage, limits: { fieldSize: 5000 } });
 
 require("dotenv").config();
 require("./config/database");
@@ -16,6 +31,15 @@ app.use(express.json());
 // to serve from the production 'build' folder
 app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
 app.use(express.static(path.join(__dirname, "build")));
+
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
+
+// app.use(upload.single("photo"));
 
 // Check if token and create req.user
 app.use(require("./config/checkToken"));

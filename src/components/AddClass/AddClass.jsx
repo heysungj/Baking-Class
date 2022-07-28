@@ -3,24 +3,50 @@ import { useState } from "react";
 import * as productsAPI from "../../utilities/products-api";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { post } from "axios";
+import { getToken } from "../../utilities/users-service";
 
 export default function AddClass() {
   const [newClass, setNewClass] = useState();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const product = {
-      ...newClass,
-      [e.target.name]: e.target.value,
-    };
+    if (e.target.files) {
+      const product = {
+        ...newClass,
+        [e.target.name]: e.target.files[0],
+      };
 
-    setNewClass(product);
-    console.log(product);
+      setNewClass(product);
+      console.log(product);
+    } else {
+      const product = {
+        ...newClass,
+        [e.target.name]: e.target.value,
+      };
+
+      setNewClass(product);
+      console.log(product);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const addedClass = await productsAPI.addClass(newClass);
+    console.log("before submit", newClass);
+    const { name, photo, description, price } = newClass;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("photo", photo);
+    formData.append("description", description);
+    formData.append("price", price);
+    const token = getToken();
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const addedClass = await post(`/api/products/newClass`, formData, config);
     console.log("added class", addedClass);
     toast.success("Add Success");
     navigate(0);
@@ -51,14 +77,7 @@ export default function AddClass() {
             required
           />
           <label>Photo</label>
-          <input
-            className=""
-            type="file"
-            name="photo"
-            onChange={handleChange}
-            required
-          />
-
+          <input type="file" name="photo" onChange={handleChange} required />
           <button className="" type="submit">
             Add Class
           </button>

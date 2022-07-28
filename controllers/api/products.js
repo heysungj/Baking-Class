@@ -107,8 +107,7 @@ async function addClass(req, res) {
       }
     }
 
-    const { newClass } = req.body;
-    let addedClass = new Product(newClass);
+    let addedClass = new Product(req.body);
     addedClass.photo = photoUrls[0];
     await addedClass.save();
     return res.json(addedClass);

@@ -35,7 +35,7 @@ router.post("/cart/new", productsCtrl.addToCart);
 // POST /api/products/cart/checkout
 router.post("/cart/checkout", productsCtrl.checkout);
 // POST /api/products/newClass
-router.post("/newClass", upload.array("photos"), productsCtrl.addClass);
+router.post("/newClass", upload.single("photo"), productsCtrl.addClass);
 // PUT /api/products/editClass
 router.put("/editClass/:productId", productsCtrl.updateClass);
 
