@@ -1,10 +1,20 @@
+const AWS = require("aws-sdk");
+const fs = require("fs/promises");
+
 const Product = require("../../models/product");
 const Order = require("../../models/order");
 const User = require("../../models/user");
-// for aws to save photos
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
-// for sendgrid mail
+
+// Set the region for AWS
+AWS.config.update({ region: "us-east-1" });
+// // Create S3 service object
+const s3 = new AWS.S3({
+  apiVersion: "2006-03-01",
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+// // for sendgrid mail
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
@@ -73,10 +83,39 @@ async function addToCart(req, res) {
 
 // Add new class to database
 async function addClass(req, res) {
-  const { newClass } = req.body;
-  let addedClass = new Product(newClass);
-  addedClass.save();
-  res.json(addedClass);
+  try {
+    // reg ex to match
+    const re = `${req.user._id.toString()}`;
+    const regex = new RegExp(re);
+    const photoUrls = [];
+
+    const allFiles = await fs.readdir("uploads/");
+
+    const matches = allFiles.filter((filePath) => {
+      return filePath.match(regex);
+    });
+
+    const numFiles = matches.length;
+    if (numFiles) {
+      // Read in the file, convert it to base64, store to S3
+      for (let i = 0; i < numFiles; i++) {
+        await readFile(matches[i], photoUrls);
+      }
+
+      for (let i = 0; i < numFiles; i++) {
+        await removeFile(matches[i]);
+      }
+    }
+
+    const { newClass } = req.body;
+    let addedClass = new Product(newClass);
+    addedClass.photo = photoUrls[0];
+    await addedClass.save();
+    return res.json(addedClass);
+  } catch (error) {
+    console.log("Error loading temp folder");
+    res.json({ error });
+  }
 }
 
 // // Delete a trip from the order history
@@ -109,6 +148,7 @@ async function checkout(req, res) {
     from: "bakingclasstest@gmail.com",
     subject: `Order Confirmation ${cart.orderId}`,
     text: `You have booked ${cart.productName} class on ${cart.startDate} at ${cart.classTime}`,
+    html: "",
   };
   sgMail.send(msg);
   await cart.save();
@@ -132,3 +172,73 @@ async function cancelOrder(req, res) {
   const canceledOrder = await Order.findByIdAndRemove(req.params.orderId);
   res.json(canceledOrder);
 }
+
+// baking-class-project
+
+const readFile = async (file, urlArr) => {
+  try {
+    const fileResult = await fs.readFile("uploads/" + file);
+
+    // Buffer Pattern; how to handle buffers; straw, intake/outtake analogy
+    const base64data = new Buffer(fileResult, "binary");
+    try {
+      const result = await s3
+        .upload({
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: file,
+          Body: base64data,
+        })
+        .promise();
+      console.log(`File upload to S3 successfully at ${result.Location}`);
+      urlArr.push(result.Location);
+    } catch (e) {
+      console.log("Error uploading file to S3", e);
+    }
+  } catch (e) {
+    console.log("Error reading temp files", e);
+  }
+};
+
+const removeFile = async (file) => {
+  await fs.rm("uploads/" + file);
+};
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+// post new ryokan using AWS
+// router.post("/new", upload.array("photos"), async (req, res) => {
+//   try {
+//     // reg ex to match
+//     const re = `${req.session.userId}`;
+//     const regex = new RegExp(re);
+//     const photoUrls = [];
+
+//     const allFiles = await fs.readdir("uploads/");
+
+//     const matches = allFiles.filter((filePath) => {
+//       return filePath.match(regex);
+//     });
+
+//     const numFiles = matches.length;
+//     if (numFiles) {
+//       // Read in the file, convert it to base64, store to S3
+//       for (i = 0; i < numFiles; i++) {
+//         await readFile(matches[i], photoUrls);
+//       }
+
+//       for (i = 0; i < numFiles; i++) {
+//         await removeFile(matches[i]);
+//       }
+//     }
+//     console.log(photoUrls);
+
+//     const newRyokan = new Ryokan(req.body);
+//     newRyokan.img = photoUrls;
+//     await newRyokan.save();
+
+//     // redirect user to index page if successfully created item
+//     res.redirect("/ryokans");
+//   } catch (error) {
+//     console.log("Error loading temp folder");
+//     res.json({ error });
+//   }
+// });
