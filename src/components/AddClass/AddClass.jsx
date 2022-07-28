@@ -79,7 +79,7 @@ export default function AddClass() {
           />
           <label>Photo</label>
           <input type="file" name="photo" onChange={handleChange} required />
-          <button className="btn btn-secondary" type="submit">
+          <button className="btn btn-primary" type="submit">
             Add Class
           </button>
         </div>

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
+import "./EditClass.css";
 
 export default function EditClass({ product }) {
   const [editedClass, setEditedClass] = useState({
@@ -38,7 +39,7 @@ export default function EditClass({ product }) {
 
   return (
     <div>
-      <div>
+      <div className="modalContainer">
         <label>Class Name</label>
         <input
           className=""
@@ -74,9 +75,14 @@ export default function EditClass({ product }) {
           onChange={handleChange}
           required
         />
-
-        <button onClick={handleSubmit}>Update Class</button>
-        <button onClick={handleDelete}>Delete Class</button>
+        <div className="flexRow">
+          <button onClick={handleSubmit} className="btn btn-primary">
+            Update Class
+          </button>
+          <button onClick={handleDelete} class="btn btn-danger">
+            Delete Class
+          </button>
+        </div>
       </div>
     </div>
   );

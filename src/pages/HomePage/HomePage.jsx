@@ -74,7 +74,7 @@ export default function HomePage({ user }) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Add New Class</h2>
         <AddClass />
       </Modal>
     </div>

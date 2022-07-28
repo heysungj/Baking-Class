@@ -8,5 +8,15 @@ align-items: center;
 
 textarea{
     width: 20rem;
+    height: 20vh;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input{
+    margin: 0.5rem;
+}

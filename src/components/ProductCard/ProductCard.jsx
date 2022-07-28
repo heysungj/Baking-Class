@@ -33,7 +33,7 @@ export default function ProductCard({ product }) {
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
+    subtitle.style.color = "#003580";
   }
 
   function closeModal() {
@@ -75,7 +75,7 @@ export default function ProductCard({ product }) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Edit Class</h2>
         <EditClass product={product} />
       </Modal>
     </div>
