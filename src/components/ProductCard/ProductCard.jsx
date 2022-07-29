@@ -45,7 +45,7 @@ export default function ProductCard({ product }) {
   return (
     <div className="eachProductContainer">
       <div className="eachProduct">
-        <h3>{product.name}</h3>
+        <label className="className">{product.name}</label>
         <AiOutlineEdit
           onClick={openModal}
           size={"2rem"}

@@ -10,8 +10,16 @@
    
 }
 
+.className{
+font-family: 'Lobster', cursive;
+color: rgb(71, 64, 64);
+font-weight: 400;
+font-size: x-large;
+
+}
+
 .eachProduct{
-    /* font-family: 'Lobster', cursive; */
+    
     font-family: 'Rubik', sans-serif;
     display: flex;
     flex-direction: row;

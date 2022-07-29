@@ -1,0 +1,28 @@
+.productDetailImg{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    margin: 1rem;
+    
+}
+
+.lobster{
+    font-family: 'Lobster', cursive;
+    margin: 1rem;
+}
+.rightContainer{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 2px solid #F8F8FF;
+    color:rgb(71, 64, 64)
+}
+
+.row-display-detailPage{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
