@@ -13,6 +13,7 @@ export default function OrderCard({ order, setOrders, orders }) {
   const convertedTmr = new Date(tomorrow.toUTCString());
   console.log(convertedTmr);
   const tomorrowTime = convertedTmr.getTime();
+  console.log("tomottowTime", tomorrowTime);
 
   useEffect(() => {
     setDisabled(order.startDate < tomorrowTime ? true : false);

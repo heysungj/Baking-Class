@@ -1,12 +1,8 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
-
-import { useNavigate } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
 import { put } from "axios";
 import { getToken } from "../../utilities/users-service";
 import "./EditClass.css";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function EditClass({
   product,
@@ -20,8 +16,8 @@ export default function EditClass({
     price: product.price,
     photo: product.photo,
   });
-  const navigate = useNavigate();
 
+  // handle change
   const handleChange = (e) => {
     let updatedClass = { ...editedClass };
 
@@ -51,14 +47,22 @@ export default function EditClass({
         Authorization: `Bearer ${token}`,
       },
     };
-    const addedClass = await put(
+    const updatedClass = await put(
       `/api/products/editClass/${product._id}`,
       formData,
       config
     );
-    console.log("added class", addedClass);
-    toast.success("Add Success");
-    navigate(0);
+    console.log("updated class", updatedClass);
+    let restProducts = await productList.filter((product) => {
+      if (updatedClass.data.id !== product.id) {
+        return true;
+      }
+    });
+
+    await restProducts.push(updatedClass.data);
+    console.log(restProducts);
+    await setProductList(restProducts);
+    await closeModal();
   };
 
   //   delete class
