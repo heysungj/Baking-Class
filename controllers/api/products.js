@@ -119,14 +119,42 @@ async function addClass(req, res) {
 
 // // Delete a trip from the order history
 async function updateClass(req, res) {
-  const { editedClass } = req.body;
-  const updatedClass = await Product.findByIdAndUpdate(req.params.productId, {
-    name: editedClass.name,
-    description: editedClass.description,
-    photo: editedClass.photo,
-    price: editedClass.price,
-  });
-  res.json(updatedClass);
+  try {
+    // reg ex to match
+    const re = `${req.user._id.toString()}`;
+    const regex = new RegExp(re);
+    const photoUrls = [];
+
+    const allFiles = await fs.readdir("uploads/");
+
+    const matches = allFiles.filter((filePath) => {
+      return filePath.match(regex);
+    });
+
+    const numFiles = matches.length;
+    if (numFiles) {
+      // Read in the file, convert it to base64, store to S3
+      for (let i = 0; i < numFiles; i++) {
+        await readFile(matches[i], photoUrls);
+      }
+
+      for (let i = 0; i < numFiles; i++) {
+        await removeFile(matches[i]);
+      }
+    }
+
+    const editedClass = req.body;
+    const updatedClass = await Product.findByIdAndUpdate(req.params.productId, {
+      name: editedClass.name,
+      description: editedClass.description,
+      photo: numFiles > 0 ? photoUrls[0] : editedClass.photo,
+      price: editedClass.price,
+    });
+    return res.json(updatedClass);
+  } catch (error) {
+    console.log("Error loading temp folder");
+    res.json({ error });
+  }
 }
 
 // // Delete a class from database

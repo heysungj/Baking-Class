@@ -37,6 +37,10 @@ router.post("/cart/checkout", productsCtrl.checkout);
 // POST /api/products/newClass
 router.post("/newClass", upload.single("photo"), productsCtrl.addClass);
 // PUT /api/products/editClass
-router.put("/editClass/:productId", productsCtrl.updateClass);
+router.put(
+  "/editClass/:productId",
+  upload.single("photo"),
+  productsCtrl.updateClass
+);
 
 module.exports = router;

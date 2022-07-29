@@ -19,7 +19,6 @@ export default function AddClass() {
       };
 
       setNewClass(product);
-      console.log(product);
     } else {
       const product = {
         ...newClass,
@@ -27,13 +26,11 @@ export default function AddClass() {
       };
 
       setNewClass(product);
-      console.log(product);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("before submit", newClass);
     const { name, photo, description, price } = newClass;
     const formData = new FormData();
     formData.append("name", name);

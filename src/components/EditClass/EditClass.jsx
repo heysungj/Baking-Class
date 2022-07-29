@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
+import { put } from "axios";
+import { getToken } from "../../utilities/users-service";
 import "./EditClass.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditClass({ product }) {
   const [editedClass, setEditedClass] = useState({
@@ -13,20 +18,41 @@ export default function EditClass({ product }) {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const editedProduct = {
-      ...editedClass,
-      [e.target.name]: e.target.value,
-    };
+    let updatedClass = { ...editedClass };
 
-    setEditedClass(editedProduct);
-    console.log("edited class", editedProduct);
+    if (e.target.files) {
+      updatedClass[e.target.name] = e.target.files[0];
+    } else {
+      updatedClass[e.target.name] = e.target.value;
+    }
+
+    setEditedClass(updatedClass);
+    console.log("edited class", updatedClass);
   };
 
   //   update class
-  const handleSubmit = async () => {
-    const updatedClass = await productsAPI.editClass(editedClass, product._id);
-    console.log("updated class", updatedClass);
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, photo, description, price } = editedClass;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("photo", photo);
+    formData.append("description", description);
+    formData.append("price", price);
+    const token = getToken();
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const addedClass = await put(
+      `/api/products/editClass/${product._id}`,
+      formData,
+      config
+    );
+    console.log("added class", addedClass);
+    toast.success("Add Success");
     navigate(0);
   };
 

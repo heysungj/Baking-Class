@@ -4,20 +4,6 @@ const favicon = require("serve-favicon");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 
-// for aws to save photos
-const multer = require("multer");
-
-// setup multer middleware to parse form-data
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, req.user._id.toString() + "-" + file.originalname);
-  },
-});
-const upload = multer({ storage: storage, limits: { fieldSize: 5000 } });
-
 require("dotenv").config();
 require("./config/database");
 
