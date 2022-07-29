@@ -4,7 +4,7 @@
     align-items: center;
     margin: 1rem;
     border-radius: 10px;
-    border: 2px solid lightgray;
+    border: 2px solid #F8F8FF;
     position: relative;
     width: 350px
    
@@ -31,5 +31,6 @@
 .btn-secondary{
     border: none;
     margin: 1rem;
+    background-color: gray;
     
 }
