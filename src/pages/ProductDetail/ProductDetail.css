@@ -1,6 +1,6 @@
 .productDetailImg{
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     border-radius: 10px;
     margin: 1rem;
     
@@ -16,8 +16,11 @@
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
-    border: 2px solid #F8F8FF;
-    color:rgb(71, 64, 64)
+    border: 3px solid #F8F8FF;
+    border-radius: 10px;
+    color:rgb(71, 64, 64);
+    margin:1rem;
+    padding: 1rem;
 }
 
 .row-display-detailPage{
@@ -25,4 +28,17 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.classTime{
+    border: 3px solid #F8F8FF;
+    margin: 1rem;
+    font-size: large;
+    padding: 0.2rem;
+}
+
+.classPrice{
+    border: 3px solid #F8F8FF;
+    padding: 0.5rem;
 }

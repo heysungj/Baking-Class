@@ -29,16 +29,19 @@ export default function OrderCard({ order }) {
   };
 
   return (
-    <div>
-      <h3>{order.ProductName}</h3>
+    <div className="OrderCardContainer">
       <img src={order.productPhoto} alt="" />
-      <h3>{order.price}</h3>
-      <h3>{order.startDate}</h3>
-      <h3>{order.classTime}</h3>
+      <div>
+        <h3>{order.productName}</h3>
+        <h3>Order: {order.orderId}</h3>
+        <h3>Price: $ {order.price}</h3>
+        <h3>Class Date: {order.startDate}</h3>
+        <h3> Start Time: {order.classTime}</h3>
 
-      <button disabled={disabled} onClick={handleClick}>
-        Cancel Reservation
-      </button>
+        <button disabled={disabled} onClick={handleClick}>
+          Cancel Reservation
+        </button>
+      </div>
     </div>
   );
 }

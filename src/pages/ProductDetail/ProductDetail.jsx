@@ -76,15 +76,16 @@ export default function ProductCard() {
     <div className="product">
       <h1 className="lobster">Product Detail</h1>
       <div className="row-display-detailPage">
-        <div className="leftContainer">
-          <img src={product.photo} alt="" className="productDetailImg" />
-        </div>
+        {/* <div className="leftContainer"> */}
+        <img src={product.photo} alt="" className="productDetailImg" />
+        {/* </div> */}
         <div className="rightContainer">
-          <h3>{product.name}</h3>
+          <h3 className="lobster">{product.name}</h3>
           <h4>{product.description}</h4>
-          <h3>{product.price}</h3>
+          <h4 className="classPrice">Class Price: $ {product.price}</h4>
 
-          <label>
+          <label for="classTime" className="classTime">
+            Class Date
             <input
               type="date"
               name="startDate"
@@ -92,42 +93,43 @@ export default function ProductCard() {
               value={data.startDate}
             />
           </label>
-
-          <label for="classTime">Choose a time:</label>
-
-          <select name="classTime" id="calss" onChange={handleChangeTime}>
-            <option
-              value="10:00"
-              disabled={selectedTime.includes("10:00") ? true : false}
-            >
-              10:00 - 12:00
-            </option>
-            <option
-              value="13:00"
-              disabled={selectedTime.includes("13:00") ? true : false}
-            >
-              13:00 - 15:00
-            </option>
-            <option
-              value="15:00"
-              disabled={selectedTime.includes("15:00") ? true : false}
-            >
-              15:00 - 17:00
-            </option>
-            <option
-              value="17:00"
-              disabled={selectedTime.includes("17:00") ? true : false}
-            >
-              17:00 - 19:00
-            </option>
-            <option
-              value="19:00"
-              disabled={selectedTime.includes("19:00") ? true : false}
-            >
-              19:00 - 21:00
-            </option>
-          </select>
+          <label for="classTime" className="classTime">
+            Choose a time{"  "}
+            <select name="classTime" id="calss" onChange={handleChangeTime}>
+              <option
+                value="10:00"
+                disabled={selectedTime.includes("10:00") ? true : false}
+              >
+                10:00 - 12:00
+              </option>
+              <option
+                value="13:00"
+                disabled={selectedTime.includes("13:00") ? true : false}
+              >
+                13:00 - 15:00
+              </option>
+              <option
+                value="15:00"
+                disabled={selectedTime.includes("15:00") ? true : false}
+              >
+                15:00 - 17:00
+              </option>
+              <option
+                value="17:00"
+                disabled={selectedTime.includes("17:00") ? true : false}
+              >
+                17:00 - 19:00
+              </option>
+              <option
+                value="19:00"
+                disabled={selectedTime.includes("19:00") ? true : false}
+              >
+                19:00 - 21:00
+              </option>
+            </select>
+          </label>
           <button
+            className="btn btn-secondary"
             onClick={() => {
               handleClick();
             }}
