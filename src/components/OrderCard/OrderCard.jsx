@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
 // import { useEffect, useState } from "react";
 
-export default function OrderCard({ order }) {
+export default function OrderCard({ order, setOrders, orders }) {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   // This gets us yesterday's time in a numbered format that we can compare to check-in's time
@@ -25,20 +25,29 @@ export default function OrderCard({ order }) {
   const handleClick = async () => {
     let canceledOrder = await productsAPI.cancelOrderById(order.id);
     console.log(canceledOrder);
-    navigate(0);
+    let restOrders = orders.filter((order) => {
+      if (canceledOrder.id !== order.id) {
+        return true;
+      }
+    });
+    setOrders(restOrders);
   };
 
   return (
     <div className="OrderCardContainer">
-      <img src={order.productPhoto} alt="" />
-      <div>
-        <h3>{order.productName}</h3>
+      <img src={order.productPhoto} alt="" className="orderImg" />
+      <div className="orderRightContainer">
+        <h3 className="lobster">{order.productName}</h3>
         <h3>Order: {order.orderId}</h3>
         <h3>Price: $ {order.price}</h3>
         <h3>Class Date: {order.startDate}</h3>
         <h3> Start Time: {order.classTime}</h3>
 
-        <button disabled={disabled} onClick={handleClick}>
+        <button
+          disabled={disabled}
+          onClick={handleClick}
+          className="btn btn-danger"
+        >
           Cancel Reservation
         </button>
       </div>

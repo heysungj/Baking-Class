@@ -75,7 +75,11 @@ export default function HomePage({ user }) {
         contentLabel="Example Modal"
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Add New Class</h2>
-        <AddClass />
+        <AddClass
+          productList={productList}
+          setProductList={setProductList}
+          closeModal={closeModal}
+        />
       </Modal>
     </div>
   );

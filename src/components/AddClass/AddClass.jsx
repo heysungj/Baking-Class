@@ -1,14 +1,11 @@
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { post } from "axios";
 import { getToken } from "../../utilities/users-service";
 import "./AddClass.css";
 
-export default function AddClass() {
+export default function AddClass({ productList, closeModal }) {
   const [newClass, setNewClass] = useState();
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     if (e.target.files) {
@@ -46,7 +43,8 @@ export default function AddClass() {
     const addedClass = await post(`/api/products/newClass`, formData, config);
     console.log("added class", addedClass);
     toast.success("Add Success");
-    navigate(0);
+    productList.push(addedClass.data);
+    closeModal();
   };
 
   return (

@@ -1,0 +1,29 @@
+.lobster{
+    font-family: 'Lobster', cursive;
+    margin: 1rem;
+}
+
+.OrderCardContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1rem;
+
+}
+
+.orderImg{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.orderRightContainer{
+    border-radius: 10px;
+    padding: 1rem;
+    border: 3px solid #F8F8FF;
+    margin: 1rem;
+    width: 50vw;
+text-align: left;}
