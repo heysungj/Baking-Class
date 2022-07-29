@@ -10,13 +10,17 @@ export default function OrderCard({ order, setOrders, orders }) {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
-  const convertedTmr = new Date(tomorrow.toUTCString());
-  console.log(convertedTmr);
-  const tomorrowTime = convertedTmr.getTime();
+  console.log("tomorrow", tomorrow);
+  const tomorrowTime = tomorrow.getTime();
   console.log("tomottowTime", tomorrowTime);
+  console.log("starDate", order.startDate);
+  const startDate = Date.parse(order.startDate);
+  console.log("star date", startDate);
+  // const startDate = order.startDate.toString;
+  // startDate.getTime();
 
   useEffect(() => {
-    setDisabled(order.startDate < tomorrowTime ? true : false);
+    setDisabled(startDate < tomorrowTime ? true : false);
   }, []);
 
   //   Cilck Cancel button to cancel the order
