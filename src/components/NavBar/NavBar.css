@@ -6,7 +6,7 @@ flex-direction: column;
 .imgIsolater{
     background: url('./image0.jpeg');
     background-size: cover;
-    height: 40vh;
+    height: 45vh;
 }
 .navbar-brand{
     font-size:2rem ;

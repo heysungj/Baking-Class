@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import { useState } from "react";
-import * as productsAPI from "../../utilities/products-api";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { post } from "axios";
@@ -75,7 +74,13 @@ export default function AddClass() {
             required
           />
           <label>Photo</label>
-          <input type="file" name="photo" onChange={handleChange} required />
+          <input
+            type="file"
+            name="photo"
+            className="fileBorder"
+            onChange={handleChange}
+            required
+          />
           <button className="btn btn-primary" type="submit">
             Add Class
           </button>

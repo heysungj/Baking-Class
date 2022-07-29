@@ -20,3 +20,6 @@ input::-webkit-inner-spin-button {
 input{
     margin: 0.5rem;
 }
+.fileBorder{
+    border: 3px solid lightgray;
+}

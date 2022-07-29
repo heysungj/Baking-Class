@@ -95,7 +95,7 @@ export default function EditClass({ product }) {
         />
         <label>Photo</label>
         <input
-          className=""
+          className="fileBorder"
           type="file"
           name="photo"
           onChange={handleChange}
