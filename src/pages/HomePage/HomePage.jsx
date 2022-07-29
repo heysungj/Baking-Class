@@ -63,7 +63,14 @@ export default function HomePage({ user }) {
       </div>
       <div className="row-display">
         {productList.map((product, index) => {
-          return <ProductCard product={product} key={index} />;
+          return (
+            <ProductCard
+              productList={productList}
+              setProductList={setProductList}
+              product={product}
+              key={index}
+            />
+          );
         })}
       </div>
       {/* modal */}

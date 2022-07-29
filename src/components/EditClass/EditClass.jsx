@@ -8,7 +8,12 @@ import { getToken } from "../../utilities/users-service";
 import "./EditClass.css";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function EditClass({ product }) {
+export default function EditClass({
+  product,
+  productList,
+  setProductList,
+  closeModal,
+}) {
   const [editedClass, setEditedClass] = useState({
     name: product.name,
     description: product.description,
@@ -60,7 +65,13 @@ export default function EditClass({ product }) {
   const handleDelete = async () => {
     const deletedClass = await productsAPI.deleteClass(product._id);
     console.log("deleted class", deletedClass);
-    navigate(0);
+    let restProducts = productList.filter((product) => {
+      if (deletedClass.id !== product.id) {
+        return true;
+      }
+    });
+    setProductList(restProducts);
+    closeModal();
   };
 
   return (

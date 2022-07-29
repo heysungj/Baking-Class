@@ -7,7 +7,7 @@ import EditClass from "../EditClass/EditClass";
 
 // import { useEffect, useState } from "react";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, productList, setProductList }) {
   // use navigate
   const navigate = useNavigate();
   const customStyles = {
@@ -76,7 +76,12 @@ export default function ProductCard({ product }) {
         contentLabel="Example Modal"
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Edit Class</h2>
-        <EditClass product={product} />
+        <EditClass
+          product={product}
+          productList={productList}
+          setProductList={setProductList}
+          closeModal={closeModal}
+        />
       </Modal>
     </div>
   );

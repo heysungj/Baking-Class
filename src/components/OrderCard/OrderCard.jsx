@@ -1,12 +1,9 @@
 import "./OrderCard.css";
-// import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
 // import { useEffect, useState } from "react";
 
 export default function OrderCard({ order, setOrders, orders }) {
-  const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   // This gets us yesterday's time in a numbered format that we can compare to check-in's time
   // This ensures a user can't edit a reservation for  dates in the past
