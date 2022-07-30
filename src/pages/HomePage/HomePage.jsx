@@ -49,7 +49,7 @@ export default function HomePage({ user }) {
       console.log(products);
     };
     List();
-  }, []);
+  }, [productList]);
 
   return (
     <div className="product">

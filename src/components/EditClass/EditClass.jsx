@@ -33,6 +33,7 @@ export default function EditClass({
 
   //   update class
   const handleSubmit = async (e) => {
+    debugger;
     e.preventDefault();
     const { name, photo, description, price } = editedClass;
     const formData = new FormData();
@@ -53,16 +54,23 @@ export default function EditClass({
       config
     );
     console.log("updated class", updatedClass);
-    let restProducts = await productList.filter((product) => {
-      if (updatedClass.data.id !== product.id) {
+    // let restProducts = productList.filter((product) => {
+    //   if (updatedClass.data._id !== product._id) {
+    //     return true;
+    //   }
+    // });
+    productList = productList.filter((product) => {
+      if (updatedClass.data._id !== product._id) {
         return true;
       }
+
+      return false;
     });
 
-    await restProducts.push(updatedClass.data);
-    console.log(restProducts);
-    await setProductList(restProducts);
-    await closeModal();
+    productList.push(updatedClass.data);
+    // console.log(productList);
+    // setProductList(productList);
+    closeModal();
   };
 
   //   delete class
