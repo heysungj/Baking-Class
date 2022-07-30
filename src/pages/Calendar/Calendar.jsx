@@ -24,8 +24,12 @@ export default function ClassCalendar() {
 
   useEffect(() => {
     const List = async () => {
-      const allOrders = await productsAPI.getAllOrders();
-
+      let allOrders = await productsAPI.getAllOrders();
+      allOrders = allOrders.filter((order) => {
+        if (order.isPaid === true) {
+          return true;
+        }
+      });
       await allOrders.map((order) => {
         let hour = order.classTime.split(":");
         let endHour = parseInt(hour[0]) + 2;

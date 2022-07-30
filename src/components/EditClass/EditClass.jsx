@@ -1,5 +1,6 @@
 import { useState } from "react";
 import * as productsAPI from "../../utilities/products-api";
+import { useNavigate } from "react-router-dom";
 import { put } from "axios";
 import { getToken } from "../../utilities/users-service";
 import "./EditClass.css";
@@ -10,6 +11,7 @@ export default function EditClass({
   setProductList,
   closeModal,
 }) {
+  const navigate = useNavigate();
   const [editedClass, setEditedClass] = useState({
     name: product.name,
     description: product.description,
@@ -54,23 +56,24 @@ export default function EditClass({
       config
     );
     console.log("updated class", updatedClass);
+    navigate(0);
     // let restProducts = productList.filter((product) => {
     //   if (updatedClass.data._id !== product._id) {
     //     return true;
     //   }
     // });
-    productList = productList.filter((product) => {
-      if (updatedClass.data._id !== product._id) {
-        return true;
-      }
+    // productList = productList.filter((product) => {
+    //   if (updatedClass.data._id !== product._id) {
+    //     return true;
+    //   }
 
-      return false;
-    });
+    //   return false;
+    // });
 
-    productList.push(updatedClass.data);
+    // productList.push(updatedClass.data);
     // console.log(productList);
     // setProductList(productList);
-    closeModal();
+    // closeModal();
   };
 
   //   delete class

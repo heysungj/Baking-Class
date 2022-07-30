@@ -1,6 +1,5 @@
 import "./ProductDetail.css";
-import { Link } from "react-router-dom";
-import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as productsAPI from "../../utilities/products-api";
 import { useEffect, useState } from "react";
 
