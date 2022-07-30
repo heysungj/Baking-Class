@@ -6,6 +6,7 @@ export default function CheckoutPage() {
   const paypal = useRef();
   const { state } = useLocation();
   let { product, data } = state;
+  console.log("checkoutpage data", data);
   const [isPaid, setIsPaid] = useState(false);
 
   //   Use Paypal Api
@@ -46,7 +47,7 @@ export default function CheckoutPage() {
       <h3>{product.name}</h3>
       <img src={product.photo} alt="" />
       <h4>Date: {data.startDate}</h4>
-      <h4>Class time: {product.classTime} </h4>
+      <h4>Class time: {data.classTime} </h4>
       <h4>Total Price: $ {product.price}</h4>
       {isPaid ? (
         <Link to="/users/myAccount">
