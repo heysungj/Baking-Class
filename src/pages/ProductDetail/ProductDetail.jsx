@@ -27,7 +27,9 @@ export default function ProductCard() {
       const currentOrders = await productsAPI.getOrderByDate(defaultStartDate);
       let time = [];
       currentOrders.map((order) => {
-        return time.push(order.classTime);
+        if (order.isPaid === true) {
+          return time.push(order.classTime);
+        }
       });
       setSelectedTime(time);
     };
@@ -46,7 +48,9 @@ export default function ProductCard() {
 
     let time = [];
     currentOrders.map((order) => {
-      return time.push(order.classTime);
+      if (order.isPaid === true) {
+        return time.push(order.classTime);
+      }
     });
     setSelectedTime(time);
     console.log(time);
