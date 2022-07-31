@@ -35,7 +35,6 @@ export default function EditClass({
 
   //   update class
   const handleSubmit = async (e) => {
-    debugger;
     e.preventDefault();
     const { name, photo, description, price } = editedClass;
     const formData = new FormData();

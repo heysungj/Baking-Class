@@ -1,0 +1,36 @@
+.checkouContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+.checkoutDetail{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.checkoutImg{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+.innerCheckoutDetail{
+    width: 50vw;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border:3px solid #F8F8FF;
+    margin:1rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+.lobster{
+    font-family: 'Lobster', cursive;
+   
+}
