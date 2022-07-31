@@ -1,0 +1,10 @@
+.authPageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lobster{
+    font-family: 'Lobster', cursive;
+    margin: 1rem;
+}
