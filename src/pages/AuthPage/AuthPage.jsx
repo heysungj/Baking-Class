@@ -20,7 +20,7 @@ export default function AuthPage({ setUser }) {
       )}
 
       <button
-        className="btn btn-warning btn-lg"
+        className="btn btn-warning "
         onClick={() => setShowSignUp(!showSignUp)}
       >
         {showSignUp ? "Existing User Log In" : "New User Sign Up"}

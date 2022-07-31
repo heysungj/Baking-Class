@@ -86,7 +86,7 @@ export default class SignUpForm extends Component {
             <button
               type="submit"
               disabled={disable}
-              className="btn btn-warning btn-lg"
+              className="btn btn-warning "
             >
               SIGN UP
             </button>
