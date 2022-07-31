@@ -7,7 +7,12 @@ import EditClass from "../EditClass/EditClass";
 
 // import { useEffect, useState } from "react";
 
-export default function ProductCard({ product, productList, setProductList }) {
+export default function ProductCard({
+  product,
+  productList,
+  setProductList,
+  user,
+}) {
   // use navigate
   const navigate = useNavigate();
   const customStyles = {
@@ -46,11 +51,13 @@ export default function ProductCard({ product, productList, setProductList }) {
     <div className="eachProductContainer">
       <div className="eachProduct">
         <label className="className">{product.name}</label>
-        <AiOutlineEdit
-          onClick={openModal}
-          size={"2rem"}
-          style={{ cursor: "pointer", margin: "0.5rem", color: "purple" }}
-        />
+        {user.admin ? (
+          <AiOutlineEdit
+            onClick={openModal}
+            size={"2rem"}
+            style={{ cursor: "pointer", margin: "0.5rem", color: "purple" }}
+          />
+        ) : null}
       </div>
       <img className="productImg" src={product.photo} alt="" />
 

@@ -55,16 +55,19 @@ export default function HomePage({ user }) {
     <div className="product">
       <div className="eachProductOuter">
         <h1>Current Classes</h1>
-        <AiOutlinePlusSquare
-          onClick={openModal}
-          size={"2.5rem"}
-          style={{ cursor: "pointer", margin: "0.5rem", color: "purple" }}
-        />
+        {user.admin ? (
+          <AiOutlinePlusSquare
+            onClick={openModal}
+            size={"2.5rem"}
+            style={{ cursor: "pointer", margin: "0.5rem", color: "purple" }}
+          />
+        ) : null}
       </div>
       <div className="row-display">
         {productList.map((product, index) => {
           return (
             <ProductCard
+              user={user}
               productList={productList}
               setProductList={setProductList}
               product={product}
