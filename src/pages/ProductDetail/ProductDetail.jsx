@@ -11,6 +11,7 @@ export default function ProductCard() {
   const { state } = useLocation();
   let { product } = state;
   const [selectedTime, setSelectedTime] = useState([]);
+  const [disable, setDisable] = useState(false);
   //   console.log(product);
 
   const starterData = {
@@ -42,6 +43,15 @@ export default function ProductCard() {
       [e.target.name]: e.target.value,
     };
     setData(newData);
+    let startdate = Date.parse(newData.startDate);
+    let defaultDate = Date.parse(defaultStartDate);
+
+    if (startdate < defaultDate) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+
     console.log(data);
     const currentOrders = await productsAPI.getOrderByDate(e.target.value);
     setOrderInfo(currentOrders);
@@ -134,6 +144,7 @@ export default function ProductCard() {
           </label>
           <button
             className="btn btn-secondary"
+            disabled={disable}
             onClick={() => {
               handleClick();
             }}
