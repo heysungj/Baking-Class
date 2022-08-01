@@ -87,4 +87,4 @@ The Wireframes:
 • POST /api/users/login
 
 **Technologies Used:**
-React, MongoDB Atlas, Express, Mongoose, Javascript , Node,Bootstrap, Heroku, AWS, PAYPAL API, SENDGRID
+React,Javascript, MongoDB Atlas, Express, Mongoose, Node,Bootstrap, Heroku, AWS, PAYPAL API, SENDGRID
