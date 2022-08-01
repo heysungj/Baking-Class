@@ -60,7 +60,7 @@ export default function CheckoutPage() {
       </div>
       {isPaid ? (
         <Link to="/users/myAccount">
-          <button>My Account</button>{" "}
+          <button className="btn btn-warning ">My Account</button>{" "}
         </Link>
       ) : (
         <div ref={paypal}></div>

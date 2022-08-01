@@ -99,9 +99,7 @@ export default function ProductCard() {
           <label for="classTime" className="classTime">
             Choose a time{"  "}
             <select name="classTime" id="calss" onChange={handleChangeTime}>
-              <option disabled value="null">
-                Select time
-              </option>
+              <option value="null">Select time</option>
               <option
                 value="10:00"
                 disabled={selectedTime.includes("10:00") ? true : false}
