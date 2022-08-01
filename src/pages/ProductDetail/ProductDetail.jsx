@@ -11,7 +11,7 @@ export default function ProductCard() {
   const { state } = useLocation();
   let { product } = state;
   const [selectedTime, setSelectedTime] = useState([]);
-  const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(true);
   //   console.log(product);
 
   const starterData = {
@@ -46,7 +46,7 @@ export default function ProductCard() {
     let startdate = Date.parse(newData.startDate);
     let defaultDate = Date.parse(defaultStartDate);
 
-    if (startdate < defaultDate) {
+    if (startdate < defaultDate || !data.classTime) {
       setDisable(true);
     } else {
       setDisable(false);
@@ -72,6 +72,12 @@ export default function ProductCard() {
       ...data,
       [e.target.name]: e.target.value,
     };
+
+    if (!newData.classTime) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
     setData(newData);
     console.log("handle change time new data", data);
   };

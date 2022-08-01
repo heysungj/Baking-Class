@@ -45,13 +45,13 @@ export default function OrderCard({ order, setOrders, orders }) {
         <h3>Class Date: {order.startDate}</h3>
         <h3> Start Time: {order.classTime}</h3>
 
-        <button
-          disabled={disabled}
-          onClick={handleClick}
-          className="btn btn-danger"
-        >
-          Cancel Reservation
-        </button>
+        {disabled ? (
+          <p style={{ color: "red" }}>cancellation can not be made</p>
+        ) : (
+          <button onClick={handleClick} className="btn btn-danger">
+            Cancel Reservation
+          </button>
+        )}
       </div>
     </div>
   );

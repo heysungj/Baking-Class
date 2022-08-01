@@ -169,6 +169,7 @@ async function checkout(req, res) {
   const user = await User.findById(req.user._id);
   // console.log("checkout user", user);
   const cart = await Order.getCart(req.user._id);
+  console.log("cart photo", cart.productPhoto);
   cart.isPaid = true;
   let htmlTemplate = `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

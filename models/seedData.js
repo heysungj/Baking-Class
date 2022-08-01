@@ -23,23 +23,23 @@ const initialUser = {
 const products = [
   {
     _id: productId1,
-    name: "Gâteau aux Fruits & Chocolate Truffle",
-    photo: "/photos/fruitPoundCake.jpeg",
+    name: "Gâteau aux Fruits ",
+    photo: "https://baking-class-project.s3.amazonaws.com/fruitPoundCake.jpeg",
     description:
       "A stylish moist pound cake filled with dried fruits. The cut dough is used to make chocolate balls. 1 whole, 4.5cm x 21cm x 5.8cm & 6 pieces",
     price: 20,
   },
   {
     _id: productId2,
-    name: "Summer Fruit Shortcake",
-    photo: "/photos/cake.jpeg",
+    name: "Fruit Shortcake",
+    photo: "https://baking-class-project.s3.amazonaws.com/cake.jpeg",
     description:
       "A refreshing shortcake perfect for the hot days with plenty of fresh cream applied to fluffy pâte à génoise and decorated with summer fruits.1 whole, 15cm diameter",
     price: 30,
   },
   {
     _id: productId3,
-    name: "Matcha Terrine & Houjicha Pudding",
+    name: "Matcha Terrine",
     photo: "/photos/greenteaCakeAndHojicha.jpeg",
     description:
       "Rich matcha terrine with ganache-like texture, accompanied with smooth houjicha pudding topped with brown sugar syrup.",
