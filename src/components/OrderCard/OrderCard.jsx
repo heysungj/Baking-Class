@@ -1,9 +1,11 @@
 import "./OrderCard.css";
 import { useEffect, useState } from "react";
 import * as productsAPI from "../../utilities/products-api";
+import { useNavigate } from "react-router-dom";
 // import { useEffect, useState } from "react";
 
-export default function OrderCard({ order, setOrders, orders }) {
+export default function OrderCard({ order, setOrders, orders, reloadData }) {
+  const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   // This gets us yesterday's time in a numbered format that we can compare to check-in's time
   // This ensures a user can't edit a reservation for  dates in the past
@@ -20,19 +22,17 @@ export default function OrderCard({ order, setOrders, orders }) {
   // startDate.getTime();
 
   useEffect(() => {
+    console.log("inside useeffect startdate", startDate);
+    console.log("inside useeffect tomorrowTime", tomorrowTime);
     setDisabled(startDate < tomorrowTime ? true : false);
   }, []);
 
   //   Cilck Cancel button to cancel the order
   const handleClick = async () => {
+    // debugger;
     let canceledOrder = await productsAPI.cancelOrderById(order.id);
     console.log(canceledOrder);
-    let restOrders = orders.filter((order) => {
-      if (canceledOrder.id !== order.id) {
-        return true;
-      }
-    });
-    setOrders(restOrders);
+    navigate(0);
   };
 
   return (

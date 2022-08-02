@@ -20,14 +20,7 @@ export default function OrderHistoryPage() {
     <div className="orderContainer">
       <h1 className="lobster">OrderHistoryPage</h1>
       {orders.map((order, index) => {
-        return (
-          <OrderCard
-            order={order}
-            orders={orders}
-            setOrders={setOrders}
-            key={index}
-          />
-        );
+        return <OrderCard order={order} key={index} />;
       })}
     </div>
   );
