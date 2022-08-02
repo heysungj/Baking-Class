@@ -9,6 +9,8 @@ align-items: center;
 textarea{
     width: 20rem;
     height: 20vh;
+    order: 3px solid lightgray;
+        border-radius: 5px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -19,6 +21,8 @@ input::-webkit-inner-spin-button {
 }
 input{
     margin: 0.5rem;
+    order: 3px solid lightgray;
+        border-radius: 5px;
 }
 .fileBorder{
     border: 3px solid lightgray;

@@ -8,6 +8,8 @@
     textarea{
         width: 20rem;
         height: 20vh;
+        border: 3px solid lightgray;
+        border-radius: 5px;
     }
     
     /* Chrome, Safari, Edge, Opera */
@@ -18,6 +20,8 @@
     }
     input{
         margin: 0.5rem;
+        border: 3px solid lightgray;
+        border-radius: 5px;
     }
 
     button{
