@@ -14,6 +14,12 @@ Expiration Date: 04/2027
 
 CVV: 825
 
+#Admin Info, feel free to use it login as an admin
+
+email:bakingclasstest@gmail.com
+
+password: 1234567
+
 **Premise**
 Customer can 'book' baking class through this website and 'pay' through PayPal API
 
