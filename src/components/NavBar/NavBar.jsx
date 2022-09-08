@@ -19,10 +19,12 @@ export default function NavBar(props) {
           <button
             className="navbar-toggler"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
+            data-toggle="collapse"
+            // data-bs-toggle="collapse"
+            // data-bs-target="#navbarNav"
+            data-target="#navbarNav"
             aria-controls="navbarNav"
-            // aria-expanded="false"
+            aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
