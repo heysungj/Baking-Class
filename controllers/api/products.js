@@ -67,11 +67,6 @@ async function allOrders(req, res) {
   const allOrders = await Order.find();
   res.json(allOrders);
 }
-// A cart is the unpaid order for a user
-// async function cart(req, res) {
-//   const cart = await TripOrder.getCart(req.user._id);
-//   res.json(cart);
-// }
 
 // Add a class to the cart
 async function addToCart(req, res) {
@@ -92,7 +87,7 @@ async function addClass(req, res) {
     const photoUrls = [];
 
     const allFiles = await fs.readdir("uploads/");
-
+    // find all files including same user id
     const matches = allFiles.filter((filePath) => {
       return filePath.match(regex);
     });
@@ -108,7 +103,7 @@ async function addClass(req, res) {
         await removeFile(matches[i]);
       }
     }
-
+    // create new product
     let addedClass = new Product(req.body);
     addedClass.photo = photoUrls[0];
     await addedClass.save();
@@ -119,7 +114,7 @@ async function addClass(req, res) {
   }
 }
 
-// // Delete a trip from the order history
+// update existing class
 async function updateClass(req, res) {
   try {
     // reg ex to match
@@ -195,16 +190,7 @@ async function checkout(req, res) {
   res.json(cart);
 }
 
-// // Return the logged in user's paid order history
-// async function history(req, res) {
-//   // Sort most recent orders first
-//   const tripOrders = await TripOrder.find({ user: req.user._id, isPaid: true })
-//     .sort("-updatedAt")
-//     .exec();
-//   res.json(tripOrders);
-// }
-
-// // Delete a trip from the order history
+// // Delete an order from the order history
 async function cancelOrder(req, res) {
   console.log("delete order id:", req.params.orderId);
   const canceledOrder = await Order.findByIdAndRemove(req.params.orderId);

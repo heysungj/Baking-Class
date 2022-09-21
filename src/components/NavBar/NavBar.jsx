@@ -39,7 +39,7 @@ export default function NavBar(props) {
 
               <li className="nav-item">
                 <Link className="nav-link " to="/calendar">
-                  Class Calender
+                  Class Calendar
                 </Link>
               </li>
               <li className="nav-item">
