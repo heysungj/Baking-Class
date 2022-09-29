@@ -56,7 +56,7 @@ async function orderByDate(req, res) {
 
 // Find all orders from a user
 async function allUserOrders(req, res) {
-  const allOrders = await Order.find({ user: req.user._id })
+  const allOrders = await Order.find({ user: req.user._id, isPaid: true })
     .sort("-startDate")
     .exec();
   res.json(allOrders);
